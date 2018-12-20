@@ -1,12 +1,16 @@
 import React from "react";
 
+const style ={
+    backgroundColor : "800000",
+    color : "FFFF00",
+}
 
 function Maincontent() {
 
     return(
-        <div>
+        <div >
         <h1>Main Content</h1>
-            <ul>
+            <ul >
                 <li>Facebook</li>
                 <li>twitter</li>
                 <li>Instagram</li>
