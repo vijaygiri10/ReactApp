@@ -1,34 +1,40 @@
-import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
-import Maincontent from "./maincontent"
-import TodoList from "./TodoList"
-import Card from "./Contactcard"
-import ContactCards from "./ContactCards"
+import React from 'react'
+import TodoItem from './TodoList'
+import todosData from './todoListData'
 
-
-const contact= {
-    "name":"vijay",
-    "url":"",
-    "phone":1587528,
-    "email":"vijaygiri10390@gmail.com"
-}
 function MyApp () {
-    return (
-      <div>
-        <h1>Vijay Kumar Giri</h1>
-        <Header />
-        <Maincontent />
-        <TodoList />
-        <Card 
-              name="vijay"
-              imgUrl=""
-              phone="768458589"
-              email="vijaygiri10@gmail.com"/>
-        <ContactCards contact />
-        <Footer />
-        </div>
-    )
-  }
+  const todoItems = todosData.map(item => <TodoItem key={item.id} item={item}/>)
+
+  return (
+    <div >
+      {todoItems}
+    </div>
+  )
+}
 
 export default MyApp
+/*
+  const ProductComponent = Products.map(function (product) {
+    return (
+      <div>
+        <h2>Product : {product.name}</h2>
+        <h3>description :{product.description}</h3>
+        <p>{product.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} - {product.description}</p>
+      </div>
+    )
+  })
+    <Joke
+        question='what is joke'
+        answer='this is answer'
+
+      />
+      <Joke />
+      {jokeComponent}
+      {ProductComponent}
+      {ToDoListComponent}
+      <Card
+        name='vijay'
+        imgUrl=''
+        phone='768458589'
+        email='vijaygiri10@gmail.com' />
+*/
