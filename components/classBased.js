@@ -1,12 +1,15 @@
 import React from 'react'
+import TodoItem from "./TodoList"
+import todosData from "./todoListData"
 
 class Header extends React.Component {
   constructor () {
     super()
     this.state = {
-      answer: 'vijgiriay'
+      answer: '12345678'
     }
   }
+
   render () {
     return (
       <div>
@@ -25,7 +28,92 @@ class Greeting extends React.Component {
 
     timeofday = (hour < 12 ? 'moning' : 'evening')
     return (
-      <h3>timeofday</h3>
+      <h3>{timeofday}</h3>
+    )
+  }
+}
+
+class StateChange extends React.Component{
+  constructor(){
+    super()
+    this.state = {
+      count:0
+    }
+    this.HandleClick = this.HandleClick.bind(this)
+    this.DoubleTheNumber =this.DoubleTheNumber.bind(this)
+  }
+
+  HandleClick() {
+    this.setState(prevState => {
+      return {
+       count: prevState.count + 1
+      }
+    }
+    )
+  }
+
+  DoubleTheNumber(){
+    this.setState((prevState =>{
+
+      return {
+        count : prevState.count * 2
+      }
+    })
+    )
+  }
+
+  HalftheChange(){
+    this.setState((prevState =>{
+
+      return {
+        count : prevState.count / 2
+      }
+    })
+    )
+  }
+
+  render(){
+    return (
+      <div>
+        <h2>{this.state.count}</h2>
+        <button onClick={this.HandleClick}>Change!</button>
+        <button onClick={this.DoubleTheNumber}>DoubleChange!</button>
+        <button onClick={this.HalftheChange}>HalfChange!</button>
+      </div>
+    )
+  }
+}
+
+class TodoItems extends React.Component {
+  constructor(){
+    super()
+    this.state = {
+      todo : todosData
+    }
+    this.HandleSelect = this.HandleSelect.bind(this)
+  }
+  
+  HandleSelect(id){
+    this.setState(prevState => {
+      const updatedTodos = prevState.todo.map(todo => {
+          if (todo.id === id) {
+              todo.completed = !todo.completed
+          }
+          return todo
+      })
+      return {
+        todo: updatedTodos
+      }
+  })
+  }
+
+  render(){
+    const todo = this.state.todo.map(item => <TodoItem key={item.id} 
+      item={item} HandleSelect={this.HandleSelect} />)
+    return(
+      <div>
+      {todo}
+      </div>
     )
   }
 }
@@ -46,7 +134,8 @@ function ClassBasedApp () {
               <br />
               <br />
             
-          
+      <StateChange />
+      <TodoItems />
     </div>
   )
 }
